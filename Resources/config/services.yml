@@ -1,0 +1,8 @@
+services:
+    simplesamlphp.auth:
+        class: SimpleSAML_Auth_Simple
+        arguments: [ %simplesamlphp.sp% ]
+
+    simplesamlphp.authenticator:
+        class: Hslavich\SimplesamlphpBundle\Security\SamlAuthenticator
+        arguments: [ @simplesamlphp.auth, @session ]

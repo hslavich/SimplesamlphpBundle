@@ -1,0 +1,19 @@
+{
+    "name": "hslavich/simplesamlphp-bundle",
+    "type": "symfony-bundle",
+    "description": "SimpleSAMLphp Bundle for Symfony2",
+    "keywords": ["simplesamlphp", "saml"],
+    "authors": [
+        {
+            "name": "hslavich",
+            "email": "hernan.slavich@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/symfony": "~2.4",
+        "simplesamlphp/simplesamlphp": "dev-master"
+    },
+    "autoload": {
+        "psr-4": { "Hslavich\\SimplesamlphpBundle\\": "" }
+    }
+}

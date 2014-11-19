@@ -45,7 +45,10 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
             $user->setSamlAttributes($token->getAttributes());
         }
 
-        return new SamlToken($user, $user->getRoles());
+        $authenticatedToken = new SamlToken($user, $user->getRoles());
+        $authenticatedToken->setAttributes($token->getAttributes());
+
+        return $authenticatedToken;
     }
 
     public function supportsToken(TokenInterface $token, $providerKey)

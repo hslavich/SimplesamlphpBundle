@@ -9,12 +9,12 @@ use Symfony\Component\Routing\Router;
 
 class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
 {
-    protected $auth;
+    protected $samlAuth;
     protected $router;
 
-    public function __construct($auth, Router $router)
+    public function __construct($samlAuth, Router $router)
     {
-        $this->auth = $auth;
+        $this->samlAuth = $samlAuth;
         $this->router = $router;
     }
 
@@ -23,6 +23,6 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
         $returnTo = $request->headers->get('referer');
         $request->getSession()->invalidate();
 
-        return new RedirectResponse($this->auth->getLogoutURL($returnTo));
+        return new RedirectResponse($this->samlAuth->getLogoutURL($returnTo));
     }
 }

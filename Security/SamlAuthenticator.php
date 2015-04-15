@@ -12,25 +12,25 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class SamlAuthenticator implements SimplePreAuthenticatorInterface
 {
-    protected $samlauth;
+    protected $samlAuth;
     protected $session;
     protected $attribute;
 
-    public function __construct($samlauth, Session $session, $attribute)
+    public function __construct($samlAuth, Session $session, $attribute)
     {
-        $this->samlauth = $samlauth;
+        $this->samlAuth = $samlAuth;
         $this->session = $session;
         $this->attribute = $attribute;
     }
 
     public function createToken(Request $request, $providerKey)
     {
-        if (!$this->samlauth->isAuthenticated()) {
+        if (!$this->samlAuth->isAuthenticated()) {
             $this->session->clear();
         }
 
-        $this->samlauth->requireAuth();
-        $attributes = $this->samlauth->getAttributes();
+        $this->samlAuth->requireAuth();
+        $attributes = $this->samlAuth->getAttributes();
 
         if (!array_key_exists($this->attribute, $attributes)) {
             throw new InvalidArgumentException(

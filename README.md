@@ -28,6 +28,8 @@ $bundles = array(
 hslavich_simplesamlphp:
     # Service provider name
     sp: default-sp
+    # Attribute which will be used as user identifier
+    attribute: uid
 ```
 
 * `security.yml`. You will need to create your own user provider.

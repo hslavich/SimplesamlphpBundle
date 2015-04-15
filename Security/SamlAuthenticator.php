@@ -14,11 +14,13 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
 {
     protected $samlauth;
     protected $session;
+    protected $attribute;
 
-    public function __construct($samlauth, Session $session)
+    public function __construct($samlauth, Session $session, $attribute)
     {
         $this->samlauth = $samlauth;
         $this->session = $session;
+        $this->attribute = $attribute;
     }
 
     public function createToken(Request $request, $providerKey)
@@ -30,7 +32,13 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
         $this->samlauth->requireAuth();
         $attributes = $this->samlauth->getAttributes();
 
-        $token = new SamlToken($attributes['uid'][0]);
+        if (!array_key_exists($this->attribute, $attributes)) {
+            throw new InvalidArgumentException(
+                sprintf("Attribute '%s' was not found in SAMLResponse", $this->attribute)
+            );
+        }
+
+        $token = new SamlToken($attributes[$this->attribute][0]);
         $token->setAttributes($attributes);
 
         return $token;

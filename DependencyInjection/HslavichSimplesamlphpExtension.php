@@ -26,5 +26,6 @@ class HslavichSimplesamlphpExtension extends Extension
         $loader->load('services.yml');
 
         $container->setParameter("simplesamlphp.sp", $config['sp']);
+        $container->setParameter("simplesamlphp.attribute", $config['attribute']);
     }
 }

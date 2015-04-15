@@ -23,6 +23,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('sp')->defaultValue('default-sp')->end()
+                ->scalarNode('attribute')->defaultValue('uid')->end()
             ->end()
         ;
 

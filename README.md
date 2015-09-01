@@ -63,7 +63,12 @@ SimpleSAMLphp Bundle for Symfony2
 
 * Now place your certificates, your `config.php`, `authsources.php` and metadata files into the according folders.
 
-* Run command `php app/console simplesamlphp:config` to copy files from `app/config/simplesamlphp` to `vendor/simplesamlphp`. (Note: When you upgrade your `simplesamlphp` library, you may have to run this command again as existing files may be overwritten.)
+* Add the environment variable to your webserver config, e.g. /etc/apache/httpd.conf
+
+        <Directory *>
+            ...
+            SetEnv SIMPLESAMLPHP_CONFIG_DIR /var/path/to/my/config
+        </Directory>
 
 * Enable session bridge storage. http://symfony.com/doc/current/cookbook/session/php_bridge.html
 

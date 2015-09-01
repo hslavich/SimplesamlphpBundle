@@ -8,12 +8,14 @@ SimpleSAMLphp Bundle for Symfony2
 * Install with composer
 
     "require": {
+        ...
         "hslavich/simplesamlphp-bundle": "dev-master"
     }
 
 * Activate bundle in `app/AppKernel.php`
 
     $bundles = array(
+        ...
         new Hslavich\SimplesamlphpBundle\HslavichSimplesamlphpBundle(),
     )
 

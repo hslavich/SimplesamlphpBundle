@@ -23,14 +23,16 @@ SimpleSAMLphp Bundle for Symfony2
 
 ## Configuration
 
-* Config bundle in `app/config/config.yml`
+* Add bundle configuration
 
+    # app/config/config.yml
     hslavich_simplesamlphp:
         # Service provider name
         sp: default-sp
 
-* `security.yml`. You will need to create your own user provider. See the [Symfony2 documentation "How to Create a custom User Provider"](http://symfony.com/doc/current/cookbook/security/custom_provider.html)
+* You will need to create your own user provider. See the [Symfony2 documentation "How to Create a custom User Provider"](http://symfony.com/doc/current/cookbook/security/custom_provider.html)
 
+    # app/config/security.yml
     security:
         providers:
             simplesaml:
@@ -63,6 +65,7 @@ SimpleSAMLphp Bundle for Symfony2
 
 * Enable session bridge storage. http://symfony.com/doc/current/cookbook/session/php_bridge.html
 
+    # app/config/config.yml
     framework:
         session:
             storage_id: session.storage.php_bridge

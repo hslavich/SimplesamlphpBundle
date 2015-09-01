@@ -21,7 +21,7 @@ SimpleSAMLphp Bundle for Symfony2
 
 * Update
 
-        `composer update hslavich/simplesamlphp-bundle`
+        composer update hslavich/simplesamlphp-bundle
 
 ## Configuration
 

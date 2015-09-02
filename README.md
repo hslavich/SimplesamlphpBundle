@@ -63,7 +63,7 @@ SimpleSAMLphp Bundle for Symfony2
 
 * Now place your certificates, your `config.php`, `authsources.php` and metadata files into the according folders.
 
-* Add the environment variable to your webserver config, e.g. /etc/apache/httpd.conf
+* Add the environment variable to your webserver config, e.g. `/etc/apache/httpd.conf`
 
         <Directory *>
             ...

@@ -1,83 +1,134 @@
 SimplesamlphpBundle
 ===================
 
-SimpleSAMLphp Bundle for Symfony2
+This is a SimpleSAMLphp Bundle for Symfony2.
 
 ## Installation
 
-* Install with composer
+Add this bundle to your Symfony2 project.
 
-        "require": {
-            ...
-            "hslavich/simplesamlphp-bundle": "dev-master"
-        }
+    composer require hslavich/simplesamlphp-bundle
 
-* Activate bundle in `app/AppKernel.php`
+or manually require this bundle in your `composer.json` file.
 
-        $bundles = array(
-            ...
-            new Hslavich\SimplesamlphpBundle\HslavichSimplesamlphpBundle(),
-        )
+    "require": {
+        ...
+        "hslavich/simplesamlphp-bundle": "dev-master"
+    }
 
-* Update
+Update your project.
 
-        composer update hslavich/simplesamlphp-bundle
+    composer update hslavich/simplesamlphp-bundle
+
+Activate the bundle in `app/AppKernel.php`.
+
+    $bundles = array(
+        ...
+        new Hslavich\SimplesamlphpBundle\HslavichSimplesamlphpBundle(),
+    )
+
 
 ## Configuration
 
-* Add bundle configuration
+Add bundle configuration settings to your Symfony2 config.
 
-        # app/config/config.yml
-        hslavich_simplesamlphp:
-            # Service provider name
-            sp: default-sp
+    # app/config/config.yml
+    hslavich_simplesamlphp:
+        # Service provider name
+        sp: default-sp
 
-* You will need to create your own user provider. See the [Symfony2 documentation "How to Create a custom User Provider"](http://symfony.com/doc/current/cookbook/security/custom_provider.html)
+You will need to create your own user provider. See the [Symfony2 documentation "How to Create a custom User Provider"](http://symfony.com/doc/current/cookbook/security/custom_provider.html).
 
-        # app/config/security.yml
-        security:
-            providers:
-                simplesaml:
-                    id: my_user_provider
+1. First, create a User class (you can also place it in your `Entity/` folder)
 
-            firewalls:
-                saml:
-                    pattern:    ^/
-                    anonymous: true
-                    stateless:  true
-                    simple_preauth:
-                        authenticator: simplesamlphp.authenticator
-                        provider: simplesaml
-                    logout:
-                        path:   /logout
-                        success_handler: simplesamlphp.logout_handler
+        # src/Acme/MyBundle/Security/User/MyUser.php
+        namespace Acme\MyBundle\Security\User;
 
-* Create the following file structure in your `app/` folder:
+        use Symfony\Component\Security\Core\User\UserInterface;
+        use Symfony\Component\Security\Core\User\EquatableInterface;
 
-        app/
-           config/
-             simplesamlphp/
-               cert/
-               config/
-               metadata/
-
-* Now place your certificates, your `config.php`, `authsources.php` and metadata files into the according folders.
-
-* Add the environment variable to your webserver config, e.g. `/etc/apache/httpd.conf`
-
-        <Directory *>
+        class MyUser implements UserInterface, EquatableInterface
+        {
             ...
-            SetEnv SIMPLESAMLPHP_CONFIG_DIR /var/path/to/my/config
-        </Directory>
+        }
 
-* Enable session bridge storage. http://symfony.com/doc/current/cookbook/session/php_bridge.html
+2. Then create the UserProvider class
 
-        # app/config/config.yml
-        framework:
-            session:
-                storage_id: session.storage.php_bridge
-                handler_id: ~
+        # src/Acme/MyBundle/Security/User/MyUserProvider.php
+        namespace Acme\MyBundle\Security\User;
 
-* Config your webserver
+        use Symfony\Component\Security\Core\User\UserProviderInterface;
+        use Symfony\Component\Security\Core\User\UserInterface;
+        use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+        use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 
-        Alias /simplesaml /home/myapp/vendor/simplesamlphp/simplesamlphp/www
+        class MyUserProvider implements UserProviderInterface
+        {
+            public function loadUserByUsername($username) { ... }
+            public function refreshUser(UserInterface $user) { ... }
+            public function supportsClass($class) { ... }
+        }
+
+3. And make your `UserProvider` a service
+
+        # src/Acme/MyBundle/Resources/config/services.yml
+        services:
+            my_user_provider:
+                class: Acme\MyBundle\Security\User\MyUserProvider
+
+Then add the `provider` and `firewalls` settings to you Symfony2 security file.
+
+    # app/config/security.yml
+    security:
+        providers:
+            simplesaml:
+                id: my_user_provider
+
+        firewalls:
+            saml:
+                pattern:    ^/
+                anonymous: true
+                stateless:  true
+                simple_preauth:
+                    authenticator: simplesamlphp.authenticator
+                    provider: simplesaml
+                logout:
+                    path:   /logout
+                    success_handler: simplesamlphp.logout_handler
+
+Create the following file structure in your `app/` folder and place your configuration files in there.
+
+    app/
+      config/
+        simplesamlphp/
+          cert/
+            saml.crt
+            saml.pem
+          config/
+            config.php
+            authsources.php
+          metadata/
+            saml20-idp-remote.php # Example
+
+Make sure to correctly set the paths for `cert/` and `metadata/` folders in your `config.php` file (absolute paths recommended). The `metadata/saml20-idp-remote.php` is just an example. See the [SimpleSAMLphp documentation, "Adding IdPs to the SP"](https://simplesamlphp.org/docs/stable/simplesamlphp-sp#section_2) for more information.
+
+You may also place those folders anywhere else on your machine, just make sure to correctly set the `SIMPLESAMLPHP_CONFIG_DIR` environment variable (see below).
+
+Add the environment variable to your webserver configuration file, e.g. `/etc/apache2/httpd.conf.local`.
+
+    <Directory *>
+        ...
+        SetEnv SIMPLESAMLPHP_CONFIG_DIR /var/path/to/my/config
+    </Directory>
+
+Enable session bridge storage (see [Symfony documentation](http://symfony.com/doc/current/cookbook/session/php_bridge.html) for more information).
+
+    # app/config/config.yml
+    framework:
+        session:
+            storage_id: session.storage.php_bridge
+            handler_id: ~
+
+Create an alias on your webserver, e.g. for an Apache2 webserver, add this line to you `http.conf.local` (or other desired configuration file).
+
+    Alias /simplesaml /home/myapp/vendor/simplesamlphp/simplesamlphp/www

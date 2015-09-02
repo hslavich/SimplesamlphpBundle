@@ -1,30 +1,30 @@
 SimplesamlphpBundle
 ===================
 
-This is a SimpleSAMLphp Bundle for Symfony2.
+This is a SimpleSAMLphp Bundle for Symfony2. We initially forked it from [`hslavich/SimplesamlphpBundle`](https://github.com/hslavich/SimplesamlphpBundle), but as that project doesn't seem to be actively maintained anymore, we decided to make this a individual forked project.
 
 ## Installation
 
 Add this bundle to your Symfony2 project.
 
-    composer require hslavich/simplesamlphp-bundle
+    composer require saxid/simplesamlphp-bundle
 
 or manually require this bundle in your `composer.json` file.
 
     "require": {
         ...
-        "hslavich/simplesamlphp-bundle": "dev-master"
+        "saxid/simplesamlphp-bundle": "dev-master"
     }
 
 Update your project.
 
-    composer update hslavich/simplesamlphp-bundle
+    composer update saxid/simplesamlphp-bundle
 
 Activate the bundle in `app/AppKernel.php`.
 
     $bundles = array(
         ...
-        new Hslavich\SimplesamlphpBundle\HslavichSimplesamlphpBundle(),
+        new Saxid\SimplesamlphpBundle\saxidSimplesamlphpBundle(),
     )
 
 
@@ -33,7 +33,7 @@ Activate the bundle in `app/AppKernel.php`.
 Add bundle configuration settings to your Symfony2 config.
 
     # app/config/config.yml
-    hslavich_simplesamlphp:
+    saxid_simplesamlphp:
         # Service provider name
         sp: default-sp
 

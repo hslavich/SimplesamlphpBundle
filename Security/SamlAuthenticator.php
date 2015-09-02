@@ -1,9 +1,9 @@
 <?php
 
-namespace Hslavich\SimplesamlphpBundle\Security;
+namespace Saxid\SimplesamlphpBundle\Security;
 
-use Hslavich\SimplesamlphpBundle\Security\Core\Authentication\Token\SamlToken;
-use Hslavich\SimplesamlphpBundle\Security\Core\User\SamlUserInterface;
+use Saxid\SimplesamlphpBundle\Security\Core\Authentication\Token\SamlToken;
+use Saxid\SimplesamlphpBundle\Security\Core\User\SamlUserInterface;
 use Symfony\Component\Security\Core\Authentication\SimplePreAuthenticatorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\HttpFoundation\Request;

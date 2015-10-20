@@ -1,19 +1,19 @@
 {
-    "name": "hslavich/simplesamlphp-bundle",
+    "name": "saxid/simplesamlphp-bundle",
     "type": "symfony-bundle",
-    "description": "SimpleSAMLphp Bundle for Symfony2",
+    "description": "SimpleSAMLphp Bundle for Symfony2. Forked from hslavich/simplesamlphp-bundle.",
     "keywords": ["simplesamlphp", "saml"],
     "authors": [
         {
-            "name": "hslavich",
-            "email": "hernan.slavich@gmail.com"
+            "name": "Moritz Hesse",
+            "email": "moritz.hesse@tu-dresden.de"
         }
     ],
     "require": {
         "symfony/symfony": ">=2.4",
-        "simplesamlphp/simplesamlphp": "~1.13"
+        "simplesamlphp/simplesamlphp": "dev-master"
     },
     "autoload": {
-        "psr-4": { "Hslavich\\SimplesamlphpBundle\\": "" }
+        "psr-4": { "Saxid\\SimplesamlphpBundle\\": "" }
     }
 }

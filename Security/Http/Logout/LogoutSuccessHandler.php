@@ -1,6 +1,6 @@
 <?php
 
-namespace Hslavich\SimplesamlphpBundle\Security\Http\Logout;
+namespace Saxid\SimplesamlphpBundle\Security\Http\Logout;
 
 use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
 use Symfony\Component\HttpFoundation\Request;

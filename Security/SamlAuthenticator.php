@@ -9,6 +9,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 
 class SamlAuthenticator implements SimplePreAuthenticatorInterface
 {
@@ -30,7 +31,19 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
         $this->samlauth->requireAuth();
         $attributes = $this->samlauth->getAttributes();
 
-        $token = new SamlToken($attributes['uid'][0]);
+        // uid LDAP attribute name
+        if(isset($attributes['uid'][0])) {
+            $uid = $attributes['uid'][0];
+        }
+        // uid SAML 2 attribute name
+        elseif(isset($attributes['urn:oid:0.9.2342.19200300.100.1.1'][0])) {
+            $uid = $attributes['urn:oid:0.9.2342.19200300.100.1.1'][0];
+        }
+        else {
+            throw new MissingOptionsException('No uid found');
+        }
+
+        $token = new SamlToken($uid);
         $token->setAttributes($attributes);
 
         return $token;

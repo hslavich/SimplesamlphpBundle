@@ -4,9 +4,9 @@ services:
         arguments: [ %simplesamlphp.sp% ]
 
     simplesamlphp.authenticator:
-        class: Saxid\SimplesamlphpBundle\Security\SamlAuthenticator
+        class: Hslavich\SimplesamlphpBundle\Security\SamlAuthenticator
         arguments: [ @simplesamlphp.auth, @session ]
 
     simplesamlphp.logout_handler:
-        class: Saxid\SimplesamlphpBundle\Security\Http\Logout\LogoutSuccessHandler
+        class: Hslavich\SimplesamlphpBundle\Security\Http\Logout\LogoutSuccessHandler
         arguments: [ @simplesamlphp.auth, @router ]

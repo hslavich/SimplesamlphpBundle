@@ -1,6 +1,6 @@
 <?php
 
-namespace Saxid\SimplesamlphpBundle\DependencyInjection;
+namespace Hslavich\SimplesamlphpBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -18,7 +18,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('saxid_simplesamlphp');
+        $rootNode = $treeBuilder->root('hslavich_simplesamlphp');
 
         $rootNode
             ->children()

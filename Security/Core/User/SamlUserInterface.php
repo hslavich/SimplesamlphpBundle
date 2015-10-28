@@ -1,6 +1,6 @@
 <?php
 
-namespace Saxid\SimplesamlphpBundle\Security\Core\User;
+namespace Hslavich\SimplesamlphpBundle\Security\Core\User;
 
 interface SamlUserInterface
 {

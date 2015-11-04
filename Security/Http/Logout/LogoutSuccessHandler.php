@@ -20,7 +20,7 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
 
     public function onLogoutSuccess(Request $request)
     {
-        $returnTo = $request->headers->get('referer');
+        $returnTo = $request->headers->get('referer', '/');
         $request->getSession()->invalidate();
 
         return new RedirectResponse($this->auth->getLogoutURL($returnTo));

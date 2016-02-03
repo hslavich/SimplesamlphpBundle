@@ -4,46 +4,44 @@ namespace Hslavich\SimplesamlphpBundle\Security;
 
 use Hslavich\SimplesamlphpBundle\Security\Core\Authentication\Token\SamlToken;
 use Hslavich\SimplesamlphpBundle\Security\Core\User\SamlUserInterface;
+use Hslavich\SimplesamlphpBundle\Exception\MissingSamlAuthAttributeException;
 use Symfony\Component\Security\Core\Authentication\SimplePreAuthenticatorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 
 class SamlAuthenticator implements SimplePreAuthenticatorInterface
 {
-    protected $samlauth;
+    protected $samlAuth;
     protected $session;
+    protected $authAttribute;
 
-    public function __construct($samlauth, Session $session)
+    public function __construct($samlAuth, Session $session, $authAttribute)
     {
-        $this->samlauth = $samlauth;
+        $this->samlAuth = $samlAuth;
         $this->session = $session;
+        $this->authAttribute = $authAttribute;
     }
 
     public function createToken(Request $request, $providerKey)
     {
-        if (!$this->samlauth->isAuthenticated()) {
+        if (!$this->samlAuth->isAuthenticated()) {
             $this->session->clear();
         }
 
-        $this->samlauth->requireAuth();
-        $attributes = $this->samlauth->getAttributes();
+        $this->samlAuth->requireAuth();
+        $attributes = $this->samlAuth->getAttributes();
 
-        // uid LDAP attribute name
-        if(isset($attributes['uid'][0])) {
-            $uid = $attributes['uid'][0];
-        }
-        // uid SAML 2 attribute name
-        elseif(isset($attributes['urn:oid:0.9.2342.19200300.100.1.1'][0])) {
-            $uid = $attributes['urn:oid:0.9.2342.19200300.100.1.1'][0];
-        }
-        else {
-            throw new MissingOptionsException('No uid found');
+        if (!array_key_exists($this->authAttribute, $attributes)) {
+            throw new MissingSamlAuthAttributeException(
+                sprintf("Attribute '%s' was not found in SAMLResponse", $this->authAttribute)
+            );
         }
 
-        $token = new SamlToken($uid);
+        $username = $attributes[$this->authAttribute][0];
+
+        $token = new SamlToken($username);
         $token->setAttributes($attributes);
 
         return $token;

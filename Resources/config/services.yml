@@ -5,8 +5,8 @@ services:
 
     simplesamlphp.authenticator:
         class: Hslavich\SimplesamlphpBundle\Security\SamlAuthenticator
-        arguments: [ @simplesamlphp.auth, @session, %simplesamlphp.auth_attribute% ]
+        arguments: [ '@simplesamlphp.auth', '@session', %simplesamlphp.auth_attribute% ]
 
     simplesamlphp.logout_handler:
         class: Hslavich\SimplesamlphpBundle\Security\Http\Logout\LogoutSuccessHandler
-        arguments: [ @simplesamlphp.auth, @router ]
+        arguments: [ '@simplesamlphp.auth', '@router' ]

@@ -1,5 +1,5 @@
 {
-    "name": "hslavich/simplesamlphp-bundle",
+    "name": "rozmarbeka/simplesamlphp-bundle",
     "type": "symfony-bundle",
     "description": "SimpleSAMLphp Bundle for Symfony2",
     "keywords": ["simplesamlphp", "saml"],
@@ -13,9 +13,15 @@
             "email": "moritz.hesse@tu-dresden.de"
         }
     ],
+	"repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/rozmarbeka/simplesamlphp"
+        }
+    ],
     "require": {
         "symfony/symfony": ">=2.8",
-        "simplesamlphp/simplesamlphp": "dev-master"
+        "rozmarbeka/simplesamlphp": "dev-master"
     },
     "autoload": {
         "psr-4": { "Hslavich\\SimplesamlphpBundle\\": "" }

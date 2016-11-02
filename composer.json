@@ -1,5 +1,5 @@
 {
-    "name": "hslavich/simplesamlphp-bundle",
+    "name": "rozmarbeka/simplesamlphp-bundle",
     "type": "symfony-bundle",
     "description": "SimpleSAMLphp Bundle for Symfony2",
     "keywords": ["simplesamlphp", "saml"],

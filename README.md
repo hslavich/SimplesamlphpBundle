@@ -3,7 +3,7 @@ SimplesamlphpBundle
 
 This is a SimpleSAMLphp Bundle for Symfony2.
 
-**Note:** For Symfony lower to 2.8, you need to use the 1.0.0 release of this bundle.
+**Note:** For Symfony 2.7 or lower, you need to use the 1.0.0 release of this bundle.
 
 ## Installation
 

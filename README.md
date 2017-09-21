@@ -1,13 +1,13 @@
 SimplesamlphpBundle
 ===================
 
-This is a SimpleSAMLphp Bundle for Symfony2.
+This is a SimpleSAMLphp Bundle for Symfony.
 
 **Note:** For Symfony 2.7 or lower, you need to use the 1.0.0 release of this bundle.
 
 ## Installation
 
-Add this bundle to your Symfony2 project.
+Add this bundle to your Symfony project.
 
     composer require hslavich/simplesamlphp-bundle
 
@@ -32,14 +32,14 @@ Activate the bundle in `app/AppKernel.php`.
 
 ## Configuration
 
-Add bundle configuration settings to your Symfony2 config.
+Add bundle configuration settings to your Symfony config.
 
     # app/config/config.yml
     hslavich_simplesamlphp:
         # Service provider name
         sp: default-sp
 
-You will need to create your own user provider. See the [Symfony2 documentation "How to Create a custom User Provider"](http://symfony.com/doc/current/cookbook/security/custom_provider.html).
+You will need to create your own user provider. See the [Symfony documentation "How to Create a custom User Provider"](http://symfony.com/doc/current/cookbook/security/custom_provider.html).
 
 1. First, create a User class (you can also place it in your `Entity/` folder)
 
@@ -78,7 +78,7 @@ You will need to create your own user provider. See the [Symfony2 documentation 
             my_user_provider:
                 class: Acme\MyBundle\Security\User\MyUserProvider
 
-Then add the `provider` and `firewalls` settings to you Symfony2 security file.
+Then add the `provider` and `firewalls` settings to you Symfony security file.
 
     # app/config/security.yml
     security:

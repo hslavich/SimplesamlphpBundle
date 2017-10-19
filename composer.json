@@ -1,7 +1,7 @@
 {
     "name": "hslavich/simplesamlphp-bundle",
     "type": "symfony-bundle",
-    "description": "SimpleSAMLphp Bundle for Symfony2",
+    "description": "SimpleSAMLphp Bundle for Symfony",
     "keywords": ["simplesamlphp", "saml"],
     "authors": [
         {

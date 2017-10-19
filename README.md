@@ -5,6 +5,7 @@ This is a SimpleSAMLphp Bundle for Symfony.
 
 **Note:** For Symfony 2.7 or lower, you need to use the 1.0.0 release of this bundle.
 
+**Note 2:** This bundle uses the full SimpleSAMLphp application. I highly recommend to use this lighter and improved [OneloginSamlBundle](https://github.com/hslavich/OneloginSamlBundle).
 ## Installation
 
 Add this bundle to your Symfony project.

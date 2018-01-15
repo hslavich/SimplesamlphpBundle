@@ -1,6 +1,6 @@
 services:
     simplesamlphp.auth:
-        class: SimpleSAML_Auth_Simple
+        class: SimpleSAML\Auth\Simple
         arguments: [ '%simplesamlphp.sp%' ]
 
     simplesamlphp.authenticator:

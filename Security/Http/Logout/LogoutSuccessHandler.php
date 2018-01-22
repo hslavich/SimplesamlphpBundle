@@ -2,6 +2,7 @@
 
 namespace Hslavich\SimplesamlphpBundle\Security\Http\Logout;
 
+use SimpleSAML\Auth\Simple;
 use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -12,7 +13,7 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
     protected $auth;
     protected $router;
 
-    public function __construct($auth, Router $router)
+    public function __construct(Simple $auth, Router $router)
     {
         $this->auth = $auth;
         $this->router = $router;

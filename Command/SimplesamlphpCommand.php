@@ -24,7 +24,7 @@ class SimplesamlphpCommand extends ContainerAwareCommand
         $configPath = $rootDir.'/config/simplesamlphp';
         $targetPath = $rootDir.'/../vendor/simplesamlphp/simplesamlphp';
 
-        $output->writeLn("Copying simplesamlphp config files");
+        $output->writeln("Copying simplesamlphp config files");
         $filesystem->mirror($configPath, $targetPath);
     }
 }

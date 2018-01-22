@@ -5,6 +5,7 @@ namespace Hslavich\SimplesamlphpBundle\Security;
 use Hslavich\SimplesamlphpBundle\Security\Core\Authentication\Token\SamlToken;
 use Hslavich\SimplesamlphpBundle\Security\Core\User\SamlUserInterface;
 use Hslavich\SimplesamlphpBundle\Exception\MissingSamlAuthAttributeException;
+use SimpleSAML\Auth\Simple;
 use Symfony\Component\Security\Http\Authentication\SimplePreAuthenticatorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +18,7 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
     protected $session;
     protected $authAttribute;
 
-    public function __construct($samlAuth, Session $session, $authAttribute)
+    public function __construct(Simple $samlAuth, Session $session, $authAttribute)
     {
         $this->samlAuth = $samlAuth;
         $this->session = $session;

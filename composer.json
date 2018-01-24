@@ -15,7 +15,7 @@
     ],
     "require": {
         "symfony/symfony": ">=2.8",
-        "simplesamlphp/simplesamlphp": "dev-master"
+        "simplesamlphp/simplesamlphp": "^1.15.0"
     },
     "autoload": {
         "psr-4": { "Hslavich\\SimplesamlphpBundle\\": "" }
